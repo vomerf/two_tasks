@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./app
+    ports:
+      - "8080:8080"
+    links:
+      - nosqldb
+    depends_on:
+      - nosqldb
+
+  nosqldb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
